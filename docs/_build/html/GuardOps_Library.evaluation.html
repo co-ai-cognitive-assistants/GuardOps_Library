@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en"
+      data-content_root="./"
+      x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }"
+      x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))"
+      class="scroll-smooth"
+      :class="{'dark': darkMode === 'dark' || (darkMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)}"
+>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>GuardOps_Library.evaluation package | GuardOps Framework  documentation</title>
+    <meta property="og:title" content="GuardOps_Library.evaluation package | GuardOps Framework  documentation" />
+    <meta name="twitter:title" content="GuardOps_Library.evaluation package | GuardOps Framework  documentation" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8d216cef" />
+      <link rel="stylesheet" type="text/css" href="_static/theme.css?v=ecdfb4fc" />
+        <link rel="search" title="Search" href="search.html" />
+        <link rel="index" title="Index" href="genindex.html" />
+
+    <script>
+    <!-- Prevent Flash of wrong theme -->
+      const userPreference = localStorage.getItem('darkMode');
+      let mode;
+      if (userPreference === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        mode = 'dark';
+        document.documentElement.classList.add('dark');
+      } else {
+        mode = 'light';
+      }
+      if (!userPreference) {localStorage.setItem('darkMode', mode)}
+    </script>
+</head>
+<body x-data="{ showSidebar: false }" class="min-h-screen font-sans antialiased bg-background text-foreground" :class="{ 'overflow-hidden': showSidebar }">
+    <div x-cloak x-show="showSidebar" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" @click.self="showSidebar = false"></div><div id="page" class="relative flex flex-col min-h-screen"><a href="#content" class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100">
+      Skip to content
+    </a><header
+  class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
+    <div class="hidden mr-4 md:flex">
+      <a href="index.html" class="flex items-center mr-6"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">GuardOps Framework  documentation</span>
+      </a></div><button
+      class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden"
+      type="button" @click="showSidebar = true">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 96 960 960" aria-hidden="true"
+        fill="currentColor">
+        <path
+          d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z" />
+      </svg>
+      <span class="sr-only">Toggle navigation menu</span>
+    </button>
+    <div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
+      <div class="flex-1 w-full md:w-auto md:flex-none"><form id="searchbox"
+      action="search.html"
+      method="get"
+      class="relative flex items-center group"
+      @keydown.k.window.meta="$refs.search.focus()">
+  <input x-ref="search"
+          name="q"
+          id="search-input"
+          type="search"
+          aria-label="Search the docs"
+          placeholder="Search ..."
+          class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" />
+  <kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
+    <span class="text-xs">⌘</span>
+    K
+  </kbd>
+</form>
+      </div>
+      <nav class="flex items-center space-x-1">
+        <button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'"
+          class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9"
+          type="button"
+          aria-label="Color theme switcher">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 96 960 960" fill="currentColor"
+            class="absolute transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0">
+            <path
+              d="M480 685q45.456 0 77.228-31.772Q589 621.456 589 576q0-45.456-31.772-77.228Q525.456 467 480 467q-45.456 0-77.228 31.772Q371 530.544 371 576q0 45.456 31.772 77.228Q434.544 685 480 685Zm0 91q-83 0-141.5-58.5T280 576q0-83 58.5-141.5T480 376q83 0 141.5 58.5T680 576q0 83-58.5 141.5T480 776ZM80 621.5q-19.152 0-32.326-13.174T34.5 576q0-19.152 13.174-32.326T80 530.5h80q19.152 0 32.326 13.174T205.5 576q0 19.152-13.174 32.326T160 621.5H80Zm720 0q-19.152 0-32.326-13.174T754.5 576q0-19.152 13.174-32.326T800 530.5h80q19.152 0 32.326 13.174T925.5 576q0 19.152-13.174 32.326T880 621.5h-80Zm-320-320q-19.152 0-32.326-13.174T434.5 256v-80q0-19.152 13.174-32.326T480 130.5q19.152 0 32.326 13.174T525.5 176v80q0 19.152-13.174 32.326T480 301.5Zm0 720q-19.152 0-32.326-13.17Q434.5 995.152 434.5 976v-80q0-19.152 13.174-32.326T480 850.5q19.152 0 32.326 13.174T525.5 896v80q0 19.152-13.174 32.33-13.174 13.17-32.326 13.17ZM222.174 382.065l-43-42Q165.5 327.391 166 308.239t13.174-33.065q13.435-13.674 32.587-13.674t32.065 13.674l42.239 43q12.674 13.435 12.555 31.706-.12 18.272-12.555 31.946-12.674 13.674-31.445 13.413-18.772-.261-32.446-13.174Zm494 494.761-42.239-43q-12.674-13.435-12.674-32.087t12.674-31.565Q686.609 756.5 705.38 757q18.772.5 32.446 13.174l43 41.761Q794.5 824.609 794 843.761t-13.174 33.065Q767.391 890.5 748.239 890.5t-32.065-13.674Zm-42-494.761Q660.5 369.391 661 350.62q.5-18.772 13.174-32.446l41.761-43Q728.609 261.5 747.761 262t33.065 13.174q13.674 13.435 13.674 32.587t-13.674 32.065l-43 42.239q-13.435 12.674-31.706 12.555-18.272-.12-31.946-12.555Zm-495 494.761Q165.5 863.391 165.5 844.239t13.674-32.065l43-42.239q13.435-12.674 32.087-12.674t31.565 12.674Q299.5 782.609 299 801.38q-.5 18.772-13.174 32.446l-41.761 43Q231.391 890.5 212.239 890t-33.065-13.174ZM480 576Z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 96 960 960" fill="currentColor"
+            class="absolute transition-all scale-0 rotate-90 dark:rotate-0 dark:scale-100">
+            <path
+              d="M480 936q-151 0-255.5-104.5T120 576q0-138 90-239.5T440 218q25-3 39 18t-1 44q-17 26-25.5 55t-8.5 61q0 90 63 153t153 63q31 0 61.5-9t54.5-25q21-14 43-1.5t19 39.5q-14 138-117.5 229T480 936Zm0-80q88 0 158-48.5T740 681q-20 5-40 8t-40 3q-123 0-209.5-86.5T364 396q0-20 3-40t8-40q-78 32-126.5 102T200 576q0 116 82 198t198 82Zm-10-270Z" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </div>
+</header>
+
+    <div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside id="left-sidebar"
+  class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky"
+  :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }">
+
+    <a href="index.html" class="!justify-start text-sm md:!hidden bg-background"><span class="font-bold text-clip whitespace-nowrap">GuardOps Framework  documentation</span>
+    </a>
+
+    <div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
+      <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">coai_eval</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="coai_eval.html">coai_eval package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="coai_eval.coai_datasets.html">coai_eval.coai_datasets package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="coai_eval.coai_datasets.standard.html">coai_eval.coai_datasets.standard package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="coai_eval.config.html">coai_eval.config package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coai_eval.evaluation.html">coai_eval.evaluation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coai_eval.exporter.html">coai_eval.exporter package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coai_eval.flow_executor.html">coai_eval.flow_executor package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coai_eval.models.html">coai_eval.models package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coai_eval.tests.html">coai_eval.tests package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coai_eval.tracing.html">coai_eval.tracing package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coai_eval.utils.html">coai_eval.utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</nav>
+      </div>
+    </div>
+    <button type="button" @click="showSidebar = false"
+      class="absolute md:hidden right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 96 960 960" fill="currentColor"
+        stroke="none" class="h-4 w-4">
+        <path
+          d="M480 632 284 828q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536 576l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480 632Z" />
+      </svg>
+    </button>
+  </aside>
+        <main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+<div class="w-full min-w-0 mx-auto">
+<nav aria-label="breadcrumbs"
+     class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
+  <a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground"
+     href="index.html">
+    <span class="hidden md:inline">GuardOps Framework  documentation</span>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         height="18"
+         width="18"
+         viewBox="0 96 960 960"
+         aria-label="Home"
+         fill="currentColor"
+         stroke="none"
+         class="md:hidden">
+      <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z" />
+    </svg>
+  </a>
+  
+<div class="mr-1">/</div><span aria-current="page"
+        class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">GuardOps_Library.evaluation package</span>
+</nav>
+
+    <div id="content" role="main">
+      <section id="guardops-library-evaluation-package">
+<h1>GuardOps_Library.evaluation package<a class="headerlink" href="#guardops-library-evaluation-package" title="Link to this heading"><span>#</span></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"><span>#</span></a></h2>
+</section>
+<section id="module-GuardOps_Library.evaluation.BaseEvaluationFramework">
+<span id="guardops-library-evaluation-baseevaluationframework-module"></span><h2>GuardOps_Library.evaluation.BaseEvaluationFramework module<a class="headerlink" href="#module-GuardOps_Library.evaluation.BaseEvaluationFramework" title="Link to this heading"><span>#</span></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.BaseEvaluationFramework.BaseEvaluationFramework">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GuardOps_Library.evaluation.BaseEvaluationFramework.</span></span><span class="sig-name descname"><span class="pre">BaseEvaluationFramework</span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/BaseEvaluationFramework.html#BaseEvaluationFramework"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.BaseEvaluationFramework.BaseEvaluationFramework" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.BaseEvaluationFramework.BaseEvaluationFramework.evaluate">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#GuardOps_Library.evaluation.evaluation.Evaluation" title="GuardOps_Library.evaluation.evaluation.Evaluation"><span class="pre">Evaluation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/BaseEvaluationFramework.html#BaseEvaluationFramework.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.BaseEvaluationFramework.BaseEvaluationFramework.evaluate" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Evaluate the given model using the specified dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – The model to be evaluated.</p></li>
+<li><p><strong>dataset</strong> – The dataset to use for evaluation.</p></li>
+<li><p><strong>metrics</strong> – Optional; the metrics to use for evaluation.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Evaluation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.BaseEvaluationFramework.BaseEvaluationFramework.help">
+<span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/BaseEvaluationFramework.html#BaseEvaluationFramework.help"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.BaseEvaluationFramework.BaseEvaluationFramework.help" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Print a detailed explanation on what the evaluation framework does, what it is based on and how to use it.
+This method should be overridden in the subclass to provide specific details.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-GuardOps_Library.evaluation.DeepevalFramework">
+<span id="guardops-library-evaluation-deepevalframework-module"></span><h2>GuardOps_Library.evaluation.DeepevalFramework module<a class="headerlink" href="#module-GuardOps_Library.evaluation.DeepevalFramework" title="Link to this heading"><span>#</span></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.DeepevalFramework.DeepevalFramework">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GuardOps_Library.evaluation.DeepevalFramework.</span></span><span class="sig-name descname"><span class="pre">DeepevalFramework</span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/DeepevalFramework.html#DeepevalFramework"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.DeepevalFramework.DeepevalFramework" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEvaluationFramework</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.DeepevalFramework.DeepevalFramework.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eval_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DeepevalFramework'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/DeepevalFramework.html#DeepevalFramework.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.DeepevalFramework.DeepevalFramework.evaluate" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>A wrapper for the Deepeval evaluate function. Use this function instead of Deepeval’s evaluate function with the usual parameters to automatically generate an evaluation that
+can then be exported to coai.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eval_name</strong> – The name of the evaluation.</p></li>
+<li><p><strong>framework</strong> – The name of the framework if a specific name is required. Defaults to DeepevalFramework.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Evaluation object containing the evaluation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.DeepevalFramework.object_to_dict">
+<span class="sig-prename descclassname"><span class="pre">GuardOps_Library.evaluation.DeepevalFramework.</span></span><span class="sig-name descname"><span class="pre">object_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/DeepevalFramework.html#object_to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.DeepevalFramework.object_to_dict" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>A utility function that takes an object of any type and recursively transforms it into a dict so that nested objects also get transformed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>obj</strong> – The object to transform.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The transformed object as a dictionary-</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-GuardOps_Library.evaluation.DefaultEvaluationFramework">
+<span id="guardops-library-evaluation-defaultevaluationframework-module"></span><h2>GuardOps_Library.evaluation.DefaultEvaluationFramework module<a class="headerlink" href="#module-GuardOps_Library.evaluation.DefaultEvaluationFramework" title="Link to this heading"><span>#</span></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.DefaultEvaluationFramework.DefaultEvaluationFramework">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GuardOps_Library.evaluation.DefaultEvaluationFramework.</span></span><span class="sig-name descname"><span class="pre">DefaultEvaluationFramework</span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/DefaultEvaluationFramework.html#DefaultEvaluationFramework"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.DefaultEvaluationFramework.DefaultEvaluationFramework" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEvaluationFramework</span></code></p>
+<p>A default implementation of the BaseEvaluationFramework.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.DefaultEvaluationFramework.DefaultEvaluationFramework.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/DefaultEvaluationFramework.html#DefaultEvaluationFramework.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.DefaultEvaluationFramework.DefaultEvaluationFramework.evaluate" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Evaluate the given model using the specified dataset and metrics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – The model to be evaluated.</p></li>
+<li><p><strong>dataset</strong> – The dataset to use for evaluation</p></li>
+<li><p><strong>metrics</strong> – The metrics to use for evaluation of model for specified dataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary where the keys are the names of the metrics and the values are the calculated scores.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.DefaultEvaluationFramework.DefaultEvaluationFramework.help">
+<span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/DefaultEvaluationFramework.html#DefaultEvaluationFramework.help"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.DefaultEvaluationFramework.DefaultEvaluationFramework.help" title="Link to this definition"><span>#</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-GuardOps_Library.evaluation.ElutherAIEvaluationFramework">
+<span id="guardops-library-evaluation-elutheraievaluationframework-module"></span><h2>GuardOps_Library.evaluation.ElutherAIEvaluationFramework module<a class="headerlink" href="#module-GuardOps_Library.evaluation.ElutherAIEvaluationFramework" title="Link to this heading"><span>#</span></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.ElutherAIEvaluationFramework.ElutherAIEvaluationFramework">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GuardOps_Library.evaluation.ElutherAIEvaluationFramework.</span></span><span class="sig-name descname"><span class="pre">ElutherAIEvaluationFramework</span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/ElutherAIEvaluationFramework.html#ElutherAIEvaluationFramework"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.ElutherAIEvaluationFramework.ElutherAIEvaluationFramework" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEvaluationFramework</span></code></p>
+<p>An evaluation framework for models using the ElutherAI evaluation toolkit.</p>
+<p>This framework provides an implementation of the <cite>evaluate</cite> method using the <cite>simple_evaluate</cite>
+function from the lm_eval library.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.ElutherAIEvaluationFramework.ElutherAIEvaluationFramework.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda:1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'result.json'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/ElutherAIEvaluationFramework.html#ElutherAIEvaluationFramework.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.ElutherAIEvaluationFramework.ElutherAIEvaluationFramework.evaluate" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Evaluate the given model using the specified parameters and tasks.</p>
+<p>This method runs the ElutherAI evaluation using the <cite>simple_evaluate</cite> function and calculates
+accuracy metrics for the specified tasks. The results are formatted and returned as an Evaluation object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_type</strong> – The type of the model to be evaluated. (e.g., hf)</p></li>
+<li><p><strong>model_args</strong> – Arguments for the model.</p></li>
+<li><p><strong>eval_name</strong> – The name of the evaluation.</p></li>
+<li><p><strong>tasks</strong> – A list of tasks to evaluate the model on. (e.g., arc_easy, arc_medium)</p></li>
+<li><p><strong>batch_size</strong> – Optional; the batch size to use during evaluation (default is “auto”).</p></li>
+<li><p><strong>device</strong> – Optional; the device to use for evaluation (default is “cuda:1”).</p></li>
+<li><p><strong>output_path</strong> – Optional; the path to save the evaluation results (default is “result.json”).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Evaluation object containing the formatted results and average accuracy. #This will contain the evaluation results with accuracy in percentages</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.ElutherAIEvaluationFramework.ElutherAIEvaluationFramework.help">
+<span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/ElutherAIEvaluationFramework.html#ElutherAIEvaluationFramework.help"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.ElutherAIEvaluationFramework.ElutherAIEvaluationFramework.help" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Print a detailed explanation on what the evaluation framework does, what it is based on and how to use it.
+This method should be overridden in the subclass to provide specific details.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-GuardOps_Library.evaluation.MMLUEvaluationFramework">
+<span id="guardops-library-evaluation-mmluevaluationframework-module"></span><h2>GuardOps_Library.evaluation.MMLUEvaluationFramework module<a class="headerlink" href="#module-GuardOps_Library.evaluation.MMLUEvaluationFramework" title="Link to this heading"><span>#</span></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.MMLUEvaluationFramework.MMLUFramework">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GuardOps_Library.evaluation.MMLUEvaluationFramework.</span></span><span class="sig-name descname"><span class="pre">MMLUFramework</span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/MMLUEvaluationFramework.html#MMLUFramework"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.MMLUEvaluationFramework.MMLUFramework" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEvaluationFramework</span></code></p>
+<p>A framework for evaluating models on the MMLU dataset.</p>
+<p>This class provides the methods to load the MMLU dataset, evaluate a model’s performance on it,
+and generate an Evaluation object containing the results.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.MMLUEvaluationFramework.MMLUFramework.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="GuardOps_Library.models.html#GuardOps_Library.models.base_model.BaseModel" title="GuardOps_Library.models.base_model.BaseModel"><span class="pre">BaseModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/MMLUEvaluationFramework.html#MMLUFramework.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.MMLUEvaluationFramework.MMLUFramework.evaluate" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Evaluate the model on the MMLU dataset.</p>
+<p>This method loads the MMLU dataset, performs predictions using the provided model,
+compares the predictions with the correct answers, and calculates the evaluation score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – The model to be evaluated. It should be an instance of BaseModel.</p></li>
+<li><p><strong>eval_name</strong> – The name of the evaluation.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments for future extensions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Evaluation object containing the evaluation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.MMLUEvaluationFramework.MMLUFramework.help">
+<span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/MMLUEvaluationFramework.html#MMLUFramework.help"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.MMLUEvaluationFramework.MMLUFramework.help" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Provide help and explanations about the MMLUFramework.</p>
+<p>This method returns a string containing detailed information on what the framework does,
+what it is based on, and how to use it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A help string explaining the MMLUFramework.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-GuardOps_Library.evaluation.MTBenchEvaluationFramework">
+<span id="guardops-library-evaluation-mtbenchevaluationframework-module"></span><h2>GuardOps_Library.evaluation.MTBenchEvaluationFramework module<a class="headerlink" href="#module-GuardOps_Library.evaluation.MTBenchEvaluationFramework" title="Link to this heading"><span>#</span></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.MTBenchEvaluationFramework.MTBenchEvaluationFramework">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GuardOps_Library.evaluation.MTBenchEvaluationFramework.</span></span><span class="sig-name descname"><span class="pre">MTBenchEvaluationFramework</span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/MTBenchEvaluationFramework.html#MTBenchEvaluationFramework"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.MTBenchEvaluationFramework.MTBenchEvaluationFramework" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEvaluationFramework</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.MTBenchEvaluationFramework.MTBenchEvaluationFramework.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/MTBenchEvaluationFramework.html#MTBenchEvaluationFramework.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.MTBenchEvaluationFramework.MTBenchEvaluationFramework.evaluate" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Evaluate the given model using the specified dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – The model to be evaluated.</p></li>
+<li><p><strong>dataset</strong> – The dataset to use for evaluation.</p></li>
+<li><p><strong>metrics</strong> – Optional; the metrics to use for evaluation.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Evaluation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.MTBenchEvaluationFramework.MTBenchEvaluationFramework.help">
+<span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/MTBenchEvaluationFramework.html#MTBenchEvaluationFramework.help"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.MTBenchEvaluationFramework.MTBenchEvaluationFramework.help" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Print a detailed explanation on what the evaluation framework does, what it is based on and how to use it.
+This method should be overridden in the subclass to provide specific details.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-GuardOps_Library.evaluation.SUMEvalFramework">
+<span id="guardops-library-evaluation-sumevalframework-module"></span><h2>GuardOps_Library.evaluation.SUMEvalFramework module<a class="headerlink" href="#module-GuardOps_Library.evaluation.SUMEvalFramework" title="Link to this heading"><span>#</span></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GuardOps_Library.evaluation.SUMEvalFramework.</span></span><span class="sig-name descname"><span class="pre">SUMEvalFramework</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEvaluationFramework</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.calculate_bert_score">
+<span class="sig-name descname"><span class="pre">calculate_bert_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.calculate_bert_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.calculate_bert_score" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Calculates BERTScore comparing a summary with the source document.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>summary (str): The generated summary text.
+document (str): The original source document text.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: A dictionary with precision, recall, and F1 BERTScore.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.calculate_rouge_c">
+<span class="sig-name descname"><span class="pre">calculate_rouge_c</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.calculate_rouge_c"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.calculate_rouge_c" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Calculates ROUGE scores comparing a summary with the source document.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>summary (str): The generated summary text.
+document (str): The original source document text.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: A dictionary containing ROUGE-1, ROUGE-2, and ROUGE-L scores.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.cosine_similarity_tf_idf">
+<span class="sig-name descname"><span class="pre">cosine_similarity_tf_idf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.cosine_similarity_tf_idf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.cosine_similarity_tf_idf" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Calculate cosine similarity between two texts using TF-IDF.</p>
+<p>Args:
+- text1 (str): First text.
+- text2 (str): Second text.</p>
+<p>Returns:
+- float: Cosine similarity score.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.create_prompt">
+<span class="sig-name descname"><span class="pre">create_prompt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.create_prompt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.create_prompt" title="Link to this definition"><span>#</span></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.evaluate" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Evaluate the given model using the specified dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – The model to be evaluated.</p></li>
+<li><p><strong>dataset</strong> – The dataset to use for evaluation.</p></li>
+<li><p><strong>metrics</strong> – Optional; the metrics to use for evaluation.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Evaluation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.filter_words">
+<span class="sig-name descname"><span class="pre">filter_words</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.filter_words"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.filter_words" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Filters out stop words, numbers, and short words from a list of words.</p>
+<p>Args:
+- word_list (List[str]): List of words.</p>
+<p>Returns:
+- Set[str]: Filtered set of words.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.get_details">
+<span class="sig-name descname"><span class="pre">get_details</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.get_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.get_details" title="Link to this definition"><span>#</span></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.get_total">
+<span class="sig-name descname"><span class="pre">get_total</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.get_total"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.get_total" title="Link to this definition"><span>#</span></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.help">
+<span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.help"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.help" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Print a detailed explanation on what the evaluation framework does, what it is based on and how to use it.
+This method should be overridden in the subclass to provide specific details.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.jaccard_similarity">
+<span class="sig-name descname"><span class="pre">jaccard_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.jaccard_similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.jaccard_similarity" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Calculate Jaccard Similarity between two sets.</p>
+<p>Args:
+- set1 (Set[str]): First set.
+- set2 (Set[str]): Second set.</p>
+<p>Returns:
+- float: Jaccard similarity score.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.new_words_in_summary">
+<span class="sig-name descname"><span class="pre">new_words_in_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.new_words_in_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.new_words_in_summary" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Identify new words present in the summary that were not in the original text.</p>
+<p>Args:
+- original_text (str): Original text.
+- summary (str): Generated summary.</p>
+<p>Returns:
+- set: Set of new words in the summary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.process_text">
+<span class="sig-name descname"><span class="pre">process_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.process_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.process_text" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Process a given text, tokenizing, lemmatizing, and extracting named entities.</p>
+<p>Args:
+- text (str): Text to be processed.</p>
+<p>Returns:
+- Set[str]: A set of processed words and named entities.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.summac_calculator">
+<span class="sig-name descname"><span class="pre">summac_calculator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.summac_calculator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.summac_calculator" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Calculates SummaC scores comparing a summary with the source document.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>document (str): The original source document text.
+summary (str): The generated summary text.</p>
+</dd>
+<dt>Returns:</dt><dd><p>score_zs1 (float): SummaCZS score.
+score_conv1 (float): SummaCConv score.</p>
+</dd>
+</dl>
+<p>Citation: <a class="reference external" href="https://github.com/tingofurro/summac">https://github.com/tingofurro/summac</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.word_overlap">
+<span class="sig-name descname"><span class="pre">word_overlap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/SUMEvalFramework.html#SUMEvalFramework.word_overlap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.word_overlap" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Compute the word overlap between two texts.</p>
+<p>Args:
+- text1 (str): First text.
+- text2 (str): Second text.</p>
+<p>Returns:
+- float: Overlap ratio.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-GuardOps_Library.evaluation.evaluation">
+<span id="guardops-library-evaluation-evaluation-module"></span><h2>GuardOps_Library.evaluation.evaluation module<a class="headerlink" href="#module-GuardOps_Library.evaluation.evaluation" title="Link to this heading"><span>#</span></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.evaluation.Evaluation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GuardOps_Library.evaluation.evaluation.</span></span><span class="sig-name descname"><span class="pre">Evaluation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framework</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/evaluation.html#Evaluation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.evaluation.Evaluation" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</section>
+<section id="module-GuardOps_Library.evaluation.metrics">
+<span id="guardops-library-evaluation-metrics-module"></span><h2>GuardOps_Library.evaluation.metrics module<a class="headerlink" href="#module-GuardOps_Library.evaluation.metrics" title="Link to this heading"><span>#</span></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.metrics.BLEUMetric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GuardOps_Library.evaluation.metrics.</span></span><span class="sig-name descname"><span class="pre">BLEUMetric</span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/metrics.html#BLEUMetric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.metrics.BLEUMetric" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#GuardOps_Library.evaluation.metrics.BaseMetric" title="GuardOps_Library.evaluation.metrics.BaseMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMetric</span></code></a></p>
+<p>A class to calculate the BLEU score.</p>
+<p>This class implements the BLEU (Bilingual Evaluation Understudy) metric.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.metrics.BLEUMetric.calculate">
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">references</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/metrics.html#BLEUMetric.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.metrics.BLEUMetric.calculate" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Calculate the BLEU score for the given predictions and references.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predictions</strong> – A list of model predictions.</p></li>
+<li><p><strong>references</strong> – A list of reference (ground truth) values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The calculated BLEU score.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.metrics.BaseMetric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GuardOps_Library.evaluation.metrics.</span></span><span class="sig-name descname"><span class="pre">BaseMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/metrics.html#BaseMetric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.metrics.BaseMetric" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>An abstract base class for evaluation metrics.</p>
+<p>This class provides the structure for implementing various evaluation metrics.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.metrics.BaseMetric.calculate">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">references</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/metrics.html#BaseMetric.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.metrics.BaseMetric.calculate" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Calculate the metric score for given predictions and referance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predictions</strong> – A list of model predictions.</p></li>
+<li><p><strong>references</strong> – A list of reference (ground truth) values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The calculated metric score.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.metrics.Rouge1Metric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GuardOps_Library.evaluation.metrics.</span></span><span class="sig-name descname"><span class="pre">Rouge1Metric</span></span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/metrics.html#Rouge1Metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.metrics.Rouge1Metric" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#GuardOps_Library.evaluation.metrics.BaseMetric" title="GuardOps_Library.evaluation.metrics.BaseMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMetric</span></code></a></p>
+<p>A class to calculate the ROUGE-1 score.</p>
+<p>This class implements a basic version of the ROUGE-1 (Recall-Oriented Understudy for Gisting Evaluation) metric.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GuardOps_Library.evaluation.metrics.Rouge1Metric.calculate">
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">references</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GuardOps_Library/evaluation/metrics.html#Rouge1Metric.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GuardOps_Library.evaluation.metrics.Rouge1Metric.calculate" title="Link to this definition"><span>#</span></a></dt>
+<dd><p>Calculate the metric score for given predictions and referance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predictions</strong> – A list of model predictions.</p></li>
+<li><p><strong>references</strong> – A list of reference (ground truth) values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The calculated metric score.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-GuardOps_Library.evaluation">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-GuardOps_Library.evaluation" title="Link to this heading"><span>#</span></a></h2>
+</section>
+</section>
+
+    </div></div><aside id="right-sidebar" class="hidden text-sm xl:block">
+  <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
+    <ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-GuardOps_Library.evaluation.BaseEvaluationFramework">GuardOps_Library.evaluation.BaseEvaluationFramework module</a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.BaseEvaluationFramework.BaseEvaluationFramework"><code class="docutils literal notranslate"><span class="pre">BaseEvaluationFramework</span></code></a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.BaseEvaluationFramework.BaseEvaluationFramework.evaluate"><code class="docutils literal notranslate"><span class="pre">BaseEvaluationFramework.evaluate()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.BaseEvaluationFramework.BaseEvaluationFramework.help"><code class="docutils literal notranslate"><span class="pre">BaseEvaluationFramework.help()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-GuardOps_Library.evaluation.DeepevalFramework">GuardOps_Library.evaluation.DeepevalFramework module</a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.DeepevalFramework.DeepevalFramework"><code class="docutils literal notranslate"><span class="pre">DeepevalFramework</span></code></a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.DeepevalFramework.DeepevalFramework.evaluate"><code class="docutils literal notranslate"><span class="pre">DeepevalFramework.evaluate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.DeepevalFramework.object_to_dict"><code class="docutils literal notranslate"><span class="pre">object_to_dict()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-GuardOps_Library.evaluation.DefaultEvaluationFramework">GuardOps_Library.evaluation.DefaultEvaluationFramework module</a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.DefaultEvaluationFramework.DefaultEvaluationFramework"><code class="docutils literal notranslate"><span class="pre">DefaultEvaluationFramework</span></code></a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.DefaultEvaluationFramework.DefaultEvaluationFramework.evaluate"><code class="docutils literal notranslate"><span class="pre">DefaultEvaluationFramework.evaluate()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.DefaultEvaluationFramework.DefaultEvaluationFramework.help"><code class="docutils literal notranslate"><span class="pre">DefaultEvaluationFramework.help()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-GuardOps_Library.evaluation.ElutherAIEvaluationFramework">GuardOps_Library.evaluation.ElutherAIEvaluationFramework module</a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.ElutherAIEvaluationFramework.ElutherAIEvaluationFramework"><code class="docutils literal notranslate"><span class="pre">ElutherAIEvaluationFramework</span></code></a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.ElutherAIEvaluationFramework.ElutherAIEvaluationFramework.evaluate"><code class="docutils literal notranslate"><span class="pre">ElutherAIEvaluationFramework.evaluate()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.ElutherAIEvaluationFramework.ElutherAIEvaluationFramework.help"><code class="docutils literal notranslate"><span class="pre">ElutherAIEvaluationFramework.help()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-GuardOps_Library.evaluation.MMLUEvaluationFramework">GuardOps_Library.evaluation.MMLUEvaluationFramework module</a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.MMLUEvaluationFramework.MMLUFramework"><code class="docutils literal notranslate"><span class="pre">MMLUFramework</span></code></a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.MMLUEvaluationFramework.MMLUFramework.evaluate"><code class="docutils literal notranslate"><span class="pre">MMLUFramework.evaluate()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.MMLUEvaluationFramework.MMLUFramework.help"><code class="docutils literal notranslate"><span class="pre">MMLUFramework.help()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-GuardOps_Library.evaluation.MTBenchEvaluationFramework">GuardOps_Library.evaluation.MTBenchEvaluationFramework module</a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.MTBenchEvaluationFramework.MTBenchEvaluationFramework"><code class="docutils literal notranslate"><span class="pre">MTBenchEvaluationFramework</span></code></a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.MTBenchEvaluationFramework.MTBenchEvaluationFramework.evaluate"><code class="docutils literal notranslate"><span class="pre">MTBenchEvaluationFramework.evaluate()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.MTBenchEvaluationFramework.MTBenchEvaluationFramework.help"><code class="docutils literal notranslate"><span class="pre">MTBenchEvaluationFramework.help()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-GuardOps_Library.evaluation.SUMEvalFramework">GuardOps_Library.evaluation.SUMEvalFramework module</a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework</span></code></a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.calculate_bert_score"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.calculate_bert_score()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.calculate_rouge_c"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.calculate_rouge_c()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.cosine_similarity_tf_idf"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.cosine_similarity_tf_idf()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.create_prompt"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.create_prompt()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.evaluate"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.evaluate()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.filter_words"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.filter_words()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.get_details"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.get_details()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.get_total"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.get_total()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.help"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.help()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.jaccard_similarity"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.jaccard_similarity()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.new_words_in_summary"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.new_words_in_summary()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.process_text"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.process_text()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.summac_calculator"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.summac_calculator()</span></code></a></li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.word_overlap"><code class="docutils literal notranslate"><span class="pre">SUMEvalFramework.word_overlap()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-GuardOps_Library.evaluation.evaluation">GuardOps_Library.evaluation.evaluation module</a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.evaluation.Evaluation"><code class="docutils literal notranslate"><span class="pre">Evaluation</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-GuardOps_Library.evaluation.metrics">GuardOps_Library.evaluation.metrics module</a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.metrics.BLEUMetric"><code class="docutils literal notranslate"><span class="pre">BLEUMetric</span></code></a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.metrics.BLEUMetric.calculate"><code class="docutils literal notranslate"><span class="pre">BLEUMetric.calculate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.metrics.BaseMetric"><code class="docutils literal notranslate"><span class="pre">BaseMetric</span></code></a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.metrics.BaseMetric.calculate"><code class="docutils literal notranslate"><span class="pre">BaseMetric.calculate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.metrics.Rouge1Metric"><code class="docutils literal notranslate"><span class="pre">Rouge1Metric</span></code></a><ul>
+<li><a class="reference internal" href="#GuardOps_Library.evaluation.metrics.Rouge1Metric.calculate"><code class="docutils literal notranslate"><span class="pre">Rouge1Metric.calculate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-GuardOps_Library.evaluation">Module contents</a></li>
+</ul>
+</div>
+</aside>
+        </main>
+      </div>
+    </div><footer class="py-6 border-t border-border md:py-0">
+    <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+      <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2024, COAI&nbsp;Built with <a class="font-medium underline underline-offset-4"
+    href="https://www.sphinx-doc.org"
+    rel="noreferrer">Sphinx 7.3.7</a></p>
+</div>
+</div>
+</footer>
+  </div>
+  
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="_static/theme.js?v=e82a16a3"></script>
+  
+</body>
+</html>

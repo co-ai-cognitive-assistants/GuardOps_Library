@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en"
+      data-content_root="../../../"
+      x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }"
+      x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))"
+      class="scroll-smooth"
+      :class="{'dark': darkMode === 'dark' || (darkMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)}"
+>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+  
+    <title>GuardOps_Library.evaluation.SUMEvalFramework | GuardOps Framework  documentation</title>
+    <meta property="og:title" content="GuardOps_Library.evaluation.SUMEvalFramework | GuardOps Framework  documentation" />
+    <meta name="twitter:title" content="GuardOps_Library.evaluation.SUMEvalFramework | GuardOps Framework  documentation" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8d216cef" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme.css?v=ecdfb4fc" />
+        <link rel="search" title="Search" href="../../../search.html" />
+        <link rel="index" title="Index" href="../../../genindex.html" />
+
+    <script>
+    <!-- Prevent Flash of wrong theme -->
+      const userPreference = localStorage.getItem('darkMode');
+      let mode;
+      if (userPreference === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        mode = 'dark';
+        document.documentElement.classList.add('dark');
+      } else {
+        mode = 'light';
+      }
+      if (!userPreference) {localStorage.setItem('darkMode', mode)}
+    </script>
+</head>
+<body x-data="{ showSidebar: false }" class="min-h-screen font-sans antialiased bg-background text-foreground" :class="{ 'overflow-hidden': showSidebar }">
+    <div x-cloak x-show="showSidebar" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" @click.self="showSidebar = false"></div><div id="page" class="relative flex flex-col min-h-screen"><a href="#content" class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100">
+      Skip to content
+    </a><header
+  class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
+    <div class="hidden mr-4 md:flex">
+      <a href="../../../index.html" class="flex items-center mr-6"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">GuardOps Framework  documentation</span>
+      </a></div><button
+      class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden"
+      type="button" @click="showSidebar = true">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 96 960 960" aria-hidden="true"
+        fill="currentColor">
+        <path
+          d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z" />
+      </svg>
+      <span class="sr-only">Toggle navigation menu</span>
+    </button>
+    <div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
+      <div class="flex-1 w-full md:w-auto md:flex-none"><form id="searchbox"
+      action="../../../search.html"
+      method="get"
+      class="relative flex items-center group"
+      @keydown.k.window.meta="$refs.search.focus()">
+  <input x-ref="search"
+          name="q"
+          id="search-input"
+          type="search"
+          aria-label="Search the docs"
+          placeholder="Search ..."
+          class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" />
+  <kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
+    <span class="text-xs">⌘</span>
+    K
+  </kbd>
+</form>
+      </div>
+      <nav class="flex items-center space-x-1">
+        <button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'"
+          class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9"
+          type="button"
+          aria-label="Color theme switcher">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 96 960 960" fill="currentColor"
+            class="absolute transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0">
+            <path
+              d="M480 685q45.456 0 77.228-31.772Q589 621.456 589 576q0-45.456-31.772-77.228Q525.456 467 480 467q-45.456 0-77.228 31.772Q371 530.544 371 576q0 45.456 31.772 77.228Q434.544 685 480 685Zm0 91q-83 0-141.5-58.5T280 576q0-83 58.5-141.5T480 376q83 0 141.5 58.5T680 576q0 83-58.5 141.5T480 776ZM80 621.5q-19.152 0-32.326-13.174T34.5 576q0-19.152 13.174-32.326T80 530.5h80q19.152 0 32.326 13.174T205.5 576q0 19.152-13.174 32.326T160 621.5H80Zm720 0q-19.152 0-32.326-13.174T754.5 576q0-19.152 13.174-32.326T800 530.5h80q19.152 0 32.326 13.174T925.5 576q0 19.152-13.174 32.326T880 621.5h-80Zm-320-320q-19.152 0-32.326-13.174T434.5 256v-80q0-19.152 13.174-32.326T480 130.5q19.152 0 32.326 13.174T525.5 176v80q0 19.152-13.174 32.326T480 301.5Zm0 720q-19.152 0-32.326-13.17Q434.5 995.152 434.5 976v-80q0-19.152 13.174-32.326T480 850.5q19.152 0 32.326 13.174T525.5 896v80q0 19.152-13.174 32.33-13.174 13.17-32.326 13.17ZM222.174 382.065l-43-42Q165.5 327.391 166 308.239t13.174-33.065q13.435-13.674 32.587-13.674t32.065 13.674l42.239 43q12.674 13.435 12.555 31.706-.12 18.272-12.555 31.946-12.674 13.674-31.445 13.413-18.772-.261-32.446-13.174Zm494 494.761-42.239-43q-12.674-13.435-12.674-32.087t12.674-31.565Q686.609 756.5 705.38 757q18.772.5 32.446 13.174l43 41.761Q794.5 824.609 794 843.761t-13.174 33.065Q767.391 890.5 748.239 890.5t-32.065-13.674Zm-42-494.761Q660.5 369.391 661 350.62q.5-18.772 13.174-32.446l41.761-43Q728.609 261.5 747.761 262t33.065 13.174q13.674 13.435 13.674 32.587t-13.674 32.065l-43 42.239q-13.435 12.674-31.706 12.555-18.272-.12-31.946-12.555Zm-495 494.761Q165.5 863.391 165.5 844.239t13.674-32.065l43-42.239q13.435-12.674 32.087-12.674t31.565 12.674Q299.5 782.609 299 801.38q-.5 18.772-13.174 32.446l-41.761 43Q231.391 890.5 212.239 890t-33.065-13.174ZM480 576Z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 96 960 960" fill="currentColor"
+            class="absolute transition-all scale-0 rotate-90 dark:rotate-0 dark:scale-100">
+            <path
+              d="M480 936q-151 0-255.5-104.5T120 576q0-138 90-239.5T440 218q25-3 39 18t-1 44q-17 26-25.5 55t-8.5 61q0 90 63 153t153 63q31 0 61.5-9t54.5-25q21-14 43-1.5t19 39.5q-14 138-117.5 229T480 936Zm0-80q88 0 158-48.5T740 681q-20 5-40 8t-40 3q-123 0-209.5-86.5T364 396q0-20 3-40t8-40q-78 32-126.5 102T200 576q0 116 82 198t198 82Zm-10-270Z" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </div>
+</header>
+
+    <div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside id="left-sidebar"
+  class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky"
+  :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }">
+
+    <a href="../../../index.html" class="!justify-start text-sm md:!hidden bg-background"><span class="font-bold text-clip whitespace-nowrap">GuardOps Framework  documentation</span>
+    </a>
+
+    <div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
+      <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">coai_eval</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../coai_eval.html">coai_eval package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../coai_eval.coai_datasets.html">coai_eval.coai_datasets package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../coai_eval.coai_datasets.standard.html">coai_eval.coai_datasets.standard package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../coai_eval.config.html">coai_eval.config package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../coai_eval.evaluation.html">coai_eval.evaluation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../coai_eval.exporter.html">coai_eval.exporter package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../coai_eval.flow_executor.html">coai_eval.flow_executor package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../coai_eval.models.html">coai_eval.models package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../coai_eval.tests.html">coai_eval.tests package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../coai_eval.tracing.html">coai_eval.tracing package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../coai_eval.utils.html">coai_eval.utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</nav>
+      </div>
+    </div>
+    <button type="button" @click="showSidebar = false"
+      class="absolute md:hidden right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 96 960 960" fill="currentColor"
+        stroke="none" class="h-4 w-4">
+        <path
+          d="M480 632 284 828q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536 576l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480 632Z" />
+      </svg>
+    </button>
+  </aside>
+        <main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+<div class="w-full min-w-0 mx-auto">
+<nav aria-label="breadcrumbs"
+     class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
+  <a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground"
+     href="../../../index.html">
+    <span class="hidden md:inline">GuardOps Framework  documentation</span>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         height="18"
+         width="18"
+         viewBox="0 96 960 960"
+         aria-label="Home"
+         fill="currentColor"
+         stroke="none"
+         class="md:hidden">
+      <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z" />
+    </svg>
+  </a>
+  
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap"
+       href="../../index.html">Module code</a>
+    
+<div class="mr-1">/</div><span aria-current="page"
+        class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">GuardOps_Library.evaluation.SUMEvalFramework</span>
+</nav>
+
+    <div id="content" role="main">
+      <h1>Source code for GuardOps_Library.evaluation.SUMEvalFramework</h1><div class="highlight"><pre>
+<span></span><code><span id="line-1"><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+</span><span id="line-2"><span class="kn">from</span> <span class="nn">evaluation.BaseEvaluationFramework</span> <span class="kn">import</span> <span class="n">BaseEvaluationFramework</span>
+</span><span id="line-3"><span class="kn">from</span> <span class="nn">evaluation.evaluation</span> <span class="kn">import</span> <span class="n">Evaluation</span>
+</span><span id="line-4"><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+</span><span id="line-5"><span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span> <span class="k">as</span> <span class="n">pairwise_cosine_similarity</span>
+</span><span id="line-6"><span class="kn">from</span> <span class="nn">spacy.lang.en.stop_words</span> <span class="kn">import</span> <span class="n">STOP_WORDS</span>
+</span><span id="line-7"><span class="kn">from</span> <span class="nn">rouge</span> <span class="kn">import</span> <span class="n">Rouge</span>
+</span><span id="line-8"><span class="kn">import</span> <span class="nn">spacy</span>
+</span><span id="line-9"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
+</span><span id="line-10"><span class="kn">from</span> <span class="nn">bert_score</span> <span class="kn">import</span> <span class="n">score</span> <span class="k">as</span> <span class="n">bert_score</span>
+</span><span id="line-11"><span class="kn">from</span> <span class="nn">jinja2</span> <span class="kn">import</span> <span class="n">Template</span>
+</span><span id="line-12"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span><span id="line-13"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span><span id="line-14"><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">logging</span>
+</span><span id="line-15"><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity_error</span><span class="p">()</span>
+</span><span id="line-16"><span class="kn">from</span> <span class="nn">summac.model_summac</span> <span class="kn">import</span> <span class="n">SummaCZS</span><span class="p">,</span> <span class="n">SummaCConv</span>
+</span><span id="line-17"><span class="kn">import</span> <span class="nn">time</span>
+</span><span id="line-18">
+<div class="viewcode-block" id="SUMEvalFramework">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework">[docs]</a>
+</span><span id="line-19"><span class="k">class</span> <span class="nc">SUMEvalFramework</span><span class="p">(</span><span class="n">BaseEvaluationFramework</span><span class="p">):</span>
+</span><span id="line-20">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="line-21">        <span class="bp">self</span><span class="o">.</span><span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;de_core_news_sm&quot;</span><span class="p">)</span>
+</span><span id="line-22">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="line-23">        <span class="bp">self</span><span class="o">.</span><span class="n">eval_details</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="line-24">        <span class="bp">self</span><span class="o">.</span><span class="n">eval_total</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="line-25">        <span class="bp">self</span><span class="o">.</span><span class="n">prompt_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Erstelle eine umfassende Zusammenfassung des nachstehenden Textes.</span><span class="se">\n</span>
+</span><span id="line-26"><span class="s2">        Die Zusammenfassung sollte alle wichtigen Punkte und Hauptgedanken des Originaltextes abdecken</span><span class="se">\n</span><span class="s2"> </span>
+</span><span id="line-27"><span class="s2">        und gleichzeitig die Informationen in einem prägnanten und leicht verständlichen Format zusammenfassen.</span><span class="se">\n</span>
+</span><span id="line-28"><span class="s2">        Achten  darauf, dass die Zusammenfassung relevante Details und Beispiele enthält,</span><span class="se">\n</span>
+</span><span id="line-29"><span class="s2">        die die Hauptgedanken unterstützen, und vermeide unnötige Informationen oder Wiederholungen.</span><span class="se">\n</span>
+</span><span id="line-30"><span class="s2">        Die Länge der Zusammenfassung sollte der Länge und Komplexität des Originaltextes angemessen sein</span><span class="se">\n</span>
+</span><span id="line-31"><span class="s2">        und einen klaren und genauen Überblick geben, ohne wichtige Informationen auszulassen.</span><span class="se">\n\n</span>
+</span><span id="line-32"><span class="s2">        Originaltext:</span><span class="se">\n</span>
+</span><span id="line-33"><span class="s2">        {{input}}&quot;&quot;&quot;</span>
+</span><span id="line-34">        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+</span><span id="line-35">
+<div class="viewcode-block" id="SUMEvalFramework.evaluate">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.evaluate">[docs]</a>
+</span><span id="line-36">    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">eval_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="line-37">        <span class="n">evaluation</span> <span class="o">=</span> <span class="n">Evaluation</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">eval_name</span><span class="p">,</span> <span class="n">framework</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+</span><span id="line-38">        <span class="n">custom_prompt</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;custom_prompt_template&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+</span><span id="line-39">
+</span><span id="line-40">        <span class="k">if</span> <span class="n">custom_prompt</span><span class="p">:</span>
+</span><span id="line-41">            <span class="bp">self</span><span class="o">.</span><span class="n">prompt_template</span> <span class="o">=</span> <span class="n">custom_prompt</span>
+</span><span id="line-42">        <span class="c1"># Calculate runtime for evaluation</span>
+</span><span id="line-43">        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> 
+</span><span id="line-44">                
+</span><span id="line-45">        <span class="c1">## Generate Summaries add tqdm:</span>
+</span><span id="line-46">        <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Generating Evaluation&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">progress_bar</span><span class="p">:</span>
+</span><span id="line-47">            <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+</span><span id="line-48">                <span class="n">tmp_row</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="line-49">                <span class="n">original_text</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+</span><span id="line-50">                <span class="c1"># Create prompt</span>
+</span><span id="line-51">                <span class="n">prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_prompt</span><span class="p">(</span><span class="n">original_text</span><span class="p">)</span>
+</span><span id="line-52">                <span class="n">generated_text</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">input_text</span><span class="o">=</span><span class="n">prompt</span><span class="p">)</span>
+</span><span id="line-53">                <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;original_text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">original_text</span>
+</span><span id="line-54">                <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;generated_text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generated_text</span>
+</span><span id="line-55">                <span class="n">tmp_row</span><span class="p">[</span><span class="s1">&#39;prompt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt_template</span>
+</span><span id="line-56">                <span class="c1"># Calculate New Words in Summary</span>
+</span><span id="line-57">                <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;new_words_in_summary&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_words_in_summary</span><span class="p">(</span><span class="n">original_text</span><span class="p">,</span> <span class="n">generated_text</span><span class="p">))</span>
+</span><span id="line-58">                <span class="c1"># Calculate Word Overlap</span>
+</span><span id="line-59">                <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;word_overlap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_overlap</span><span class="p">(</span><span class="n">original_text</span><span class="p">,</span> <span class="n">generated_text</span><span class="p">)</span>
+</span><span id="line-60">                <span class="c1"># Number of New Words in Summary</span>
+</span><span id="line-61">                <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;number_of_new_words_in_summary&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;new_words_in_summary&quot;</span><span class="p">])</span>
+</span><span id="line-62">                <span class="c1"># Word Count of Orignal and Generated Text</span>
+</span><span id="line-63">                <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;word_count_original&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">original_text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</span><span id="line-64">                <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;word_count_generated&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">generated_text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</span><span id="line-65">                <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;word_count_difference&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;word_count_original&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;word_count_generated&quot;</span><span class="p">]</span>
+</span><span id="line-66">                <span class="c1"># Calculate Jacard Similarity</span>
+</span><span id="line-67">                <span class="n">words_original</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_text</span><span class="p">(</span><span class="n">original_text</span><span class="p">)</span>
+</span><span id="line-68">                <span class="n">words_summary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_text</span><span class="p">(</span><span class="n">generated_text</span><span class="p">)</span>
+</span><span id="line-69">                <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;jaccard_similarity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jaccard_similarity</span><span class="p">(</span><span class="n">words_original</span><span class="p">,</span> <span class="n">words_summary</span><span class="p">)</span>
+</span><span id="line-70">                <span class="c1"># Calculate Cosine Similarity</span>
+</span><span id="line-71">                <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;cosine_similarity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cosine_similarity_tf_idf</span><span class="p">(</span><span class="n">original_text</span><span class="p">,</span> <span class="n">generated_text</span><span class="p">)</span>
+</span><span id="line-72">                <span class="c1"># Calculate BERTScore</span>
+</span><span id="line-73">                <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;bert_p1&quot;</span><span class="p">],</span> <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;bert_r1&quot;</span><span class="p">],</span> <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;bert_f1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_bert_score</span><span class="p">(</span><span class="n">generated_text</span><span class="p">,</span> <span class="n">original_text</span><span class="p">)</span>
+</span><span id="line-74">                <span class="c1"># Calculate Rouge at split the values of the dict to tmp_row</span>
+</span><span id="line-75">                <span class="n">bert_scores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_rouge_c</span><span class="p">(</span><span class="n">generated_text</span><span class="p">,</span> <span class="n">original_text</span><span class="p">)</span>
+</span><span id="line-76">                <span class="n">tmp_row</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">bert_scores</span><span class="p">)</span>
+</span><span id="line-77">                <span class="c1"># Calculate SummaC</span>
+</span><span id="line-78">                <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;summac_zs&quot;</span><span class="p">],</span> <span class="n">tmp_row</span><span class="p">[</span><span class="s2">&quot;summac_conv&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">summac_calculator</span><span class="p">(</span><span class="n">original_text</span><span class="p">,</span> <span class="n">generated_text</span><span class="p">)</span>
+</span><span id="line-79">                
+</span><span id="line-80">
+</span><span id="line-81">                <span class="bp">self</span><span class="o">.</span><span class="n">eval_details</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_row</span><span class="p">)</span>
+</span><span id="line-82">                <span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="line-83">        
+</span><span id="line-84">        <span class="c1"># Calculate mean, min, max, std for word_count_difference</span>
+</span><span id="line-85">        <span class="n">word_count_difference</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;word_count_difference&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_details</span><span class="p">]</span>
+</span><span id="line-86">        
+</span><span id="line-87">        <span class="n">min_dif</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">word_count_difference</span><span class="p">))</span>
+</span><span id="line-88">        <span class="n">max_dif</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">word_count_difference</span><span class="p">))</span>
+</span><span id="line-89">        <span class="n">std_dif</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">word_count_difference</span><span class="p">))</span>
+</span><span id="line-90">
+</span><span id="line-91">        <span class="bp">self</span><span class="o">.</span><span class="n">eval_total</span><span class="p">[</span><span class="s2">&quot;word_count_difference_min&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_dif</span>
+</span><span id="line-92">        <span class="bp">self</span><span class="o">.</span><span class="n">eval_total</span><span class="p">[</span><span class="s2">&quot;word_count_difference_max&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_dif</span>
+</span><span id="line-93">        <span class="bp">self</span><span class="o">.</span><span class="n">eval_total</span><span class="p">[</span><span class="s2">&quot;word_count_difference_std&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">std_dif</span>
+</span><span id="line-94">
+</span><span id="line-95">        <span class="c1"># Emd time calculation</span>
+</span><span id="line-96">        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># Step 3: Capture end time</span>
+</span><span id="line-97">        <span class="n">runtime_seconds</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span> 
+</span><span id="line-98">
+</span><span id="line-99">        <span class="c1"># Consolidate all figures of the dictionary to mean values and add to eval_total</span>
+</span><span id="line-100">        <span class="c1"># only if value of key is a number (float or int)</span>
+</span><span id="line-101">        <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eval_details</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Consolidating Evaluation&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">progress_bar</span><span class="p">:</span>
+</span><span id="line-102">            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_details</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span id="line-103">                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eval_details</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">key</span><span class="p">],</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+</span><span id="line-104">                    <span class="bp">self</span><span class="o">.</span><span class="n">eval_total</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_details</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eval_details</span><span class="p">)</span>
+</span><span id="line-105">                <span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> 
+</span><span id="line-106">
+</span><span id="line-107">        <span class="n">total_tests</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eval_details</span><span class="p">)</span>
+</span><span id="line-108">
+</span><span id="line-109">        <span class="c1">## Standard return</span>
+</span><span id="line-110">        <span class="n">evaluation</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;total_score&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_total</span><span class="p">[</span><span class="s1">&#39;summac_conv&#39;</span><span class="p">],</span> <span class="s1">&#39;runtime&#39;</span><span class="p">:</span> <span class="n">runtime_seconds</span><span class="p">,</span> <span class="s1">&#39;total_tests&#39;</span><span class="p">:</span> <span class="n">total_tests</span><span class="p">,</span>  <span class="s1">&#39;scores&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_total</span><span class="p">,</span> <span class="s1">&#39;details&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_details</span><span class="p">}</span>
+</span><span id="line-111">        <span class="k">return</span> <span class="n">evaluation</span></div>
+
+</span><span id="line-112">
+<div class="viewcode-block" id="SUMEvalFramework.get_details">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.get_details">[docs]</a>
+</span><span id="line-113">    <span class="k">def</span> <span class="nf">get_details</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="line-114">        <span class="c1"># return as pandas dataframe</span>
+</span><span id="line-115">        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eval_details</span><span class="p">)</span></div>
+
+</span><span id="line-116">    
+<div class="viewcode-block" id="SUMEvalFramework.get_total">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.get_total">[docs]</a>
+</span><span id="line-117">    <span class="k">def</span> <span class="nf">get_total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="line-118">        <span class="c1"># return as pandas dataframe</span>
+</span><span id="line-119">        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eval_total</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+</span><span id="line-120">
+<div class="viewcode-block" id="SUMEvalFramework.help">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.help">[docs]</a>
+</span><span id="line-121">    <span class="k">def</span> <span class="nf">help</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="line-122">        <span class="n">explanation</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+</span><span id="line-123"><span class="s2">        **New Words in Summary**: Measures the number of unique words in the summary that are not present in the original text. Ideally, this figure should be low, as a good summary should primarily consist of key terms from the original text. High values may indicate the summary is introducing irrelevant or new content.</span>
+</span><span id="line-124">
+</span><span id="line-125"><span class="s2">        **Word Overlap**:&quot; This metric calculates the overlap in words between the original text and the summary. A higher overlap is generally better, as it suggests the summary effectively captures the main terms and concepts from the original text.</span>
+</span><span id="line-126">
+</span><span id="line-127"><span class="s2">        **Number of New Words in Summary**: Similar to &#39;New Words in Summary&#39;, but quantifies the count. A lower number is preferable, indicating that the summary is closely aligned with the original content.</span>
+</span><span id="line-128">
+</span><span id="line-129"><span class="s2">        **Word Count of Original and Generated Text**: These metrics compare the length of the original text with the summary. Ideally, the summary should be significantly shorter than the original text while still capturing the main points, indicating efficiency in summarization.</span>
+</span><span id="line-130">
+</span><span id="line-131"><span class="s2">        **Word Count Difference**: Reflects the difference in word count between the original text and the summary. A larger difference (without loss of key content) is typically better, as it indicates a more concise summary.</span>
+</span><span id="line-132">
+</span><span id="line-133"><span class="s2">        **Jaccard Similarity**: Measures the similarity between the sets of unique words in the original text and the summary. Higher values are better, as they indicate a greater overlap in content, suggesting that the summary is representative of the original text.</span>
+</span><span id="line-134">
+</span><span id="line-135"><span class="s2">        **Cosine Similarity (TF-IDF)**: Uses TF-IDF to compute the cosine similarity between the original text and the summary. Higher values are preferable, as they suggest that the summary and the original text are similar in terms of content and meaning.</span>
+</span><span id="line-136">
+</span><span id="line-137"><span class="s2">        **BERTScore**: Evaluates the semantic similarity between the summary and the original text using BERT embeddings. Higher scores (precision, recall, F1) are desirable, indicating a summary that closely matches the semantics of the original text.</span>
+</span><span id="line-138">
+</span><span id="line-139"><span class="s2">        **ROUGE Scores**: Include ROUGE-1, ROUGE-2, and ROUGE-L, measuring the overlap of unigrams, bigrams, and the longest common subsequence, respectively, between the summary and the original text. Higher scores are better, indicating more effective capturing of the content and structure of the original text.</span>
+</span><span id="line-140">
+</span><span id="line-141"><span class="s2">        **SummaC**: Based on the paeper &quot;SummaC: Re-Visiting NLI-based Models for Inconsistency Detection in Summarization&quot; (https://paperswithcode.com/paper/summac-re-visiting-nli-based-models-for). SummaC is a metric that measures the consistency between the summary and the original text. Higher values are better, as they indicate that the summary is consistent with the original text.</span>
+</span><span id="line-142"><span class="s2">        **SummaCZS**:The SummaCzs metric is a measure of summary consistency proposed by Laban et al. (2021). It is defined as:</span>
+</span><span id="line-143"><span class="s2">            Pass sentence pairs from the document (D) and summary (S) through an NLI model to generate an M x N entailment score matrix E, where M is the number of document sentences and N is the number of summary sentences. Eij refers to the entailment score between the ith document sentence and jth summary sentence.</span>
+</span><span id="line-144"><span class="s2">            Take the maximum entailment score for each summary sentence by column: max(E, axis=&#39;col&#39;)[j] = max(Ei1, Ei2,..., EiM)</span>
+</span><span id="line-145"><span class="s2">            This produces a 1 x N vector containing the maximum entailment score for each summary sentence.</span>
+</span><span id="line-146"><span class="s2">            Take the mean of this 1 x N vector to produce the final scalar SummaCzs consistency score.</span>
+</span><span id="line-147"><span class="s2">            A higher SummaCzs score indicates greater predicted consistency between the document and summary. The maximum value of 1.0 indicates the model predicts the summary is fully entailed by the document, while lower values indicate more inconsistency detected.</span>
+</span><span id="line-148"><span class="s2">            The limitation of SummaCzs is its reliance on only the maximum entailment scores, rather than the full distribution of scores for each summary sentence.</span>
+</span><span id="line-149">
+</span><span id="line-150"><span class="s2">        **SummaCConv**:The SummaCConv metric is a measure of summary consistency proposed by Laban et al. (2021) that addresses limitations with SummaCzs. It is defined as:</span>
+</span><span id="line-151"><span class="s2">            Same first step as SummaCzs - pass sentence pairs from the document (D) and summary (S) through an NLI model to generate an M x N entailment score matrix E.</span>
+</span><span id="line-152"><span class="s2">            Bin the scores for each summary sentence into H histograms, each with Prob(score is in bin h). This captures the distribution of entailment scores from the document sentences for each summary sentence.</span>
+</span><span id="line-153"><span class="s2">            Pass the H x N binned score matrix through a 1D convolution layer to compile the score distributions for each summary sentence into N scalar scores, one per summary sentence.</span>
+</span><span id="line-154"><span class="s2">            Take the mean of the N summary sentence scores to produce the final scalar SummaCConv consistency score.</span>
+</span><span id="line-155"><span class="s2">            As with SummaCzs, a higher SummaCConv score indicates greater predicted consistency between the document and summary. The convolution layer addresses limitations with SummaCzs by considering the full distribution of entailment scores rather than just maximum values.</span>
+</span><span id="line-156"><span class="s2">            The convolution layer parameters are trained on a dataset of document-summary pairs labeled as consistent or inconsistent to learn effective compilation of the per-sentence score distributions.</span>
+</span><span id="line-157">
+</span><span id="line-158"><span class="s2">        **ToDo**: Further Implementation possible https://arxiv.org/abs/2103.12693</span>
+</span><span id="line-159"><span class="s2">                    https://eugeneyan.com/writing/abstractive/</span>
+</span><span id="line-160"><span class="s2">                    &quot;&quot;&quot;</span>
+</span><span id="line-161">        <span class="n">formatted_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">explanation</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span>
+</span><span id="line-162">        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formatted_lines</span><span class="p">)</span></div>
+
+</span><span id="line-163">    
+</span><span id="line-164">    <span class="c1">## Helper functions</span>
+</span><span id="line-165">
+<div class="viewcode-block" id="SUMEvalFramework.create_prompt">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.create_prompt">[docs]</a>
+</span><span id="line-166">    <span class="k">def</span> <span class="nf">create_prompt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span> <span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="line-167">        <span class="n">template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prompt_template</span><span class="p">)</span>
+</span><span id="line-168">        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="nb">input</span><span class="p">)</span></div>
+
+</span><span id="line-169">
+</span><span id="line-170">
+<div class="viewcode-block" id="SUMEvalFramework.calculate_bert_score">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.calculate_bert_score">[docs]</a>
+</span><span id="line-171">    <span class="k">def</span> <span class="nf">calculate_bert_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">summary</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="line-172"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-173"><span class="sd">        Calculates BERTScore comparing a summary with the source document.</span>
+</span><span id="line-174">
+</span><span id="line-175"><span class="sd">        Args:</span>
+</span><span id="line-176"><span class="sd">            summary (str): The generated summary text.</span>
+</span><span id="line-177"><span class="sd">            document (str): The original source document text.</span>
+</span><span id="line-178">
+</span><span id="line-179"><span class="sd">        Returns:</span>
+</span><span id="line-180"><span class="sd">            dict: A dictionary with precision, recall, and F1 BERTScore.</span>
+</span><span id="line-181"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="line-182">        <span class="n">P</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">F1</span> <span class="o">=</span> <span class="n">bert_score</span><span class="p">([</span><span class="n">summary</span><span class="p">],</span> <span class="p">[</span><span class="n">document</span><span class="p">],</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="n">rescale_with_baseline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="line-183">        <span class="k">return</span> <span class="n">P</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">R</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">F1</span><span class="o">.</span><span class="n">item</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="SUMEvalFramework.calculate_rouge_c">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.calculate_rouge_c">[docs]</a>
+</span><span id="line-184">    <span class="k">def</span> <span class="nf">calculate_rouge_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">summary</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="line-185"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-186"><span class="sd">        Calculates ROUGE scores comparing a summary with the source document.</span>
+</span><span id="line-187">
+</span><span id="line-188"><span class="sd">        Args:</span>
+</span><span id="line-189"><span class="sd">            summary (str): The generated summary text.</span>
+</span><span id="line-190"><span class="sd">            document (str): The original source document text.</span>
+</span><span id="line-191">
+</span><span id="line-192"><span class="sd">        Returns:</span>
+</span><span id="line-193"><span class="sd">            dict: A dictionary containing ROUGE-1, ROUGE-2, and ROUGE-L scores.</span>
+</span><span id="line-194"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="line-195">        <span class="n">rouge</span> <span class="o">=</span> <span class="n">Rouge</span><span class="p">()</span>
+</span><span id="line-196">        <span class="n">scores</span> <span class="o">=</span> <span class="n">rouge</span><span class="o">.</span><span class="n">get_scores</span><span class="p">(</span><span class="n">summary</span><span class="p">,</span> <span class="n">document</span><span class="p">)</span>
+</span><span id="line-197">        <span class="n">flattened_dict</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">outer_key</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">inner_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">value</span> 
+</span><span id="line-198">                  <span class="k">for</span> <span class="n">outer_key</span><span class="p">,</span> <span class="n">inner_dict</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> 
+</span><span id="line-199">                  <span class="k">for</span> <span class="n">inner_key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">inner_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</span><span id="line-200">        <span class="k">return</span> <span class="n">flattened_dict</span></div>
+
+</span><span id="line-201">
+</span><span id="line-202">
+<div class="viewcode-block" id="SUMEvalFramework.cosine_similarity_tf_idf">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.cosine_similarity_tf_idf">[docs]</a>
+</span><span id="line-203">    <span class="k">def</span> <span class="nf">cosine_similarity_tf_idf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">text2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span id="line-204"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-205"><span class="sd">        Calculate cosine similarity between two texts using TF-IDF.</span>
+</span><span id="line-206">
+</span><span id="line-207"><span class="sd">        Args:</span>
+</span><span id="line-208"><span class="sd">        - text1 (str): First text.</span>
+</span><span id="line-209"><span class="sd">        - text2 (str): Second text.</span>
+</span><span id="line-210">
+</span><span id="line-211"><span class="sd">        Returns:</span>
+</span><span id="line-212"><span class="sd">        - float: Cosine similarity score.</span>
+</span><span id="line-213"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="line-214">        <span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">text1</span><span class="p">,</span> <span class="n">text2</span><span class="p">])</span>
+</span><span id="line-215">        <span class="n">vectors</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+</span><span id="line-216">        <span class="k">return</span> <span class="n">pairwise_cosine_similarity</span><span class="p">(</span><span class="n">vectors</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span></div>
+
+</span><span id="line-217">
+<div class="viewcode-block" id="SUMEvalFramework.process_text">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.process_text">[docs]</a>
+</span><span id="line-218">    <span class="k">def</span> <span class="nf">process_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="line-219"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-220"><span class="sd">        Process a given text, tokenizing, lemmatizing, and extracting named entities.</span>
+</span><span id="line-221">
+</span><span id="line-222"><span class="sd">        Args:</span>
+</span><span id="line-223"><span class="sd">        - text (str): Text to be processed.</span>
+</span><span id="line-224">
+</span><span id="line-225"><span class="sd">        Returns:</span>
+</span><span id="line-226"><span class="sd">        - Set[str]: A set of processed words and named entities.</span>
+</span><span id="line-227"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="line-228">        <span class="c1"># Process the text using spaCy</span>
+</span><span id="line-229">        <span class="n">doc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span><span id="line-230">
+</span><span id="line-231">        <span class="c1"># Extract words and named entities</span>
+</span><span id="line-232">        <span class="n">words</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="line-233">            <span class="n">token</span><span class="o">.</span><span class="n">lemma_</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="o">.</span><span class="n">is_stop</span> <span class="ow">and</span> <span class="n">token</span><span class="o">.</span><span class="n">is_alpha</span>
+</span><span id="line-234">        <span class="p">}</span>
+</span><span id="line-235">        <span class="n">named_entities</span> <span class="o">=</span> <span class="p">{</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">}</span>
+</span><span id="line-236">
+</span><span id="line-237">        <span class="c1"># Combine words and named entities</span>
+</span><span id="line-238">        <span class="k">return</span> <span class="n">words</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">named_entities</span><span class="p">)</span></div>
+
+</span><span id="line-239">    
+<div class="viewcode-block" id="SUMEvalFramework.jaccard_similarity">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.jaccard_similarity">[docs]</a>
+</span><span id="line-240">    <span class="k">def</span> <span class="nf">jaccard_similarity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">set1</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">set2</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span id="line-241"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-242"><span class="sd">        Calculate Jaccard Similarity between two sets.</span>
+</span><span id="line-243">
+</span><span id="line-244"><span class="sd">        Args:</span>
+</span><span id="line-245"><span class="sd">        - set1 (Set[str]): First set.</span>
+</span><span id="line-246"><span class="sd">        - set2 (Set[str]): Second set.</span>
+</span><span id="line-247">
+</span><span id="line-248"><span class="sd">        Returns:</span>
+</span><span id="line-249"><span class="sd">        - float: Jaccard similarity score.</span>
+</span><span id="line-250"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="line-251">        <span class="n">intersection</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
+</span><span id="line-252">        <span class="n">union</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
+</span><span id="line-253">        <span class="k">return</span> <span class="n">intersection</span> <span class="o">/</span> <span class="n">union</span></div>
+
+</span><span id="line-254">
+<div class="viewcode-block" id="SUMEvalFramework.word_overlap">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.word_overlap">[docs]</a>
+</span><span id="line-255">    <span class="k">def</span> <span class="nf">word_overlap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">text2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span id="line-256"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-257"><span class="sd">        Compute the word overlap between two texts.</span>
+</span><span id="line-258">
+</span><span id="line-259"><span class="sd">        Args:</span>
+</span><span id="line-260"><span class="sd">        - text1 (str): First text.</span>
+</span><span id="line-261"><span class="sd">        - text2 (str): Second text.</span>
+</span><span id="line-262">
+</span><span id="line-263"><span class="sd">        Returns:</span>
+</span><span id="line-264"><span class="sd">        - float: Overlap ratio.</span>
+</span><span id="line-265"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="line-266">        <span class="n">words1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">text1</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</span><span id="line-267">        <span class="n">words2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">text2</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</span><span id="line-268">        <span class="n">overlap</span> <span class="o">=</span> <span class="n">words1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">words2</span><span class="p">)</span>
+</span><span id="line-269">        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">overlap</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">words2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">overlap</span><span class="p">))</span></div>
+
+</span><span id="line-270">
+<div class="viewcode-block" id="SUMEvalFramework.new_words_in_summary">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.new_words_in_summary">[docs]</a>
+</span><span id="line-271">    <span class="k">def</span> <span class="nf">new_words_in_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">summary</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="line-272"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-273"><span class="sd">        Identify new words present in the summary that were not in the original text.</span>
+</span><span id="line-274">
+</span><span id="line-275"><span class="sd">        Args:</span>
+</span><span id="line-276"><span class="sd">        - original_text (str): Original text.</span>
+</span><span id="line-277"><span class="sd">        - summary (str): Generated summary.</span>
+</span><span id="line-278">
+</span><span id="line-279"><span class="sd">        Returns:</span>
+</span><span id="line-280"><span class="sd">        - set: Set of new words in the summary.</span>
+</span><span id="line-281"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="line-282">        <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;de_core_news_sm&quot;</span><span class="p">)</span>
+</span><span id="line-283">        <span class="n">original_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+</span><span id="line-284">            <span class="bp">self</span><span class="o">.</span><span class="n">filter_words</span><span class="p">([</span><span class="n">token</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">nlp</span><span class="p">(</span><span class="n">original_text</span><span class="o">.</span><span class="n">lower</span><span class="p">())])</span>
+</span><span id="line-285">        <span class="p">)</span>
+</span><span id="line-286">        <span class="n">summary_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filter_words</span><span class="p">([</span><span class="n">token</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">nlp</span><span class="p">(</span><span class="n">summary</span><span class="o">.</span><span class="n">lower</span><span class="p">())]))</span>
+</span><span id="line-287">
+</span><span id="line-288">        <span class="c1"># Find the new words in the summary</span>
+</span><span id="line-289">        <span class="n">new_words</span> <span class="o">=</span> <span class="n">summary_words</span> <span class="o">-</span> <span class="n">original_words</span>
+</span><span id="line-290">        <span class="k">return</span> <span class="n">new_words</span></div>
+
+</span><span id="line-291">
+</span><span id="line-292">
+<div class="viewcode-block" id="SUMEvalFramework.filter_words">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.filter_words">[docs]</a>
+</span><span id="line-293">    <span class="k">def</span> <span class="nf">filter_words</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="line-294"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-295"><span class="sd">        Filters out stop words, numbers, and short words from a list of words.</span>
+</span><span id="line-296">
+</span><span id="line-297"><span class="sd">        Args:</span>
+</span><span id="line-298"><span class="sd">        - word_list (List[str]): List of words.</span>
+</span><span id="line-299">
+</span><span id="line-300"><span class="sd">        Returns:</span>
+</span><span id="line-301"><span class="sd">        - Set[str]: Filtered set of words.</span>
+</span><span id="line-302"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="line-303">        <span class="k">return</span> <span class="p">{</span>
+</span><span id="line-304">            <span class="n">word</span>
+</span><span id="line-305">            <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_list</span>
+</span><span id="line-306">            <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STOP_WORDS</span> <span class="ow">and</span> <span class="n">word</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span>
+</span><span id="line-307">        <span class="p">}</span></div>
+
+</span><span id="line-308">
+<div class="viewcode-block" id="SUMEvalFramework.summac_calculator">
+<a class="viewcode-back" href="../../../GuardOps_Library.evaluation.html#GuardOps_Library.evaluation.SUMEvalFramework.SUMEvalFramework.summac_calculator">[docs]</a>
+</span><span id="line-309">    <span class="k">def</span> <span class="nf">summac_calculator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">summary</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="line-310"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-311"><span class="sd">        Calculates SummaC scores comparing a summary with the source document.</span>
+</span><span id="line-312"><span class="sd">        </span>
+</span><span id="line-313"><span class="sd">        Args:</span>
+</span><span id="line-314"><span class="sd">            document (str): The original source document text.</span>
+</span><span id="line-315"><span class="sd">            summary (str): The generated summary text.</span>
+</span><span id="line-316"><span class="sd">        </span>
+</span><span id="line-317"><span class="sd">        Returns:</span>
+</span><span id="line-318"><span class="sd">            score_zs1 (float): SummaCZS score.</span>
+</span><span id="line-319"><span class="sd">            score_conv1 (float): SummaCConv score.</span>
+</span><span id="line-320">
+</span><span id="line-321"><span class="sd">        Citation: https://github.com/tingofurro/summac</span>
+</span><span id="line-322"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="line-323">        <span class="n">model_zs</span> <span class="o">=</span> <span class="n">SummaCZS</span><span class="p">(</span><span class="n">granularity</span><span class="o">=</span><span class="s2">&quot;sentence&quot;</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;vitc&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="c1"># If you have a GPU: switch to: device=&quot;cuda&quot;</span>
+</span><span id="line-324">        <span class="n">model_conv</span> <span class="o">=</span> <span class="n">SummaCConv</span><span class="p">(</span><span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vitc&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&#39;percentile&#39;</span><span class="p">,</span> <span class="n">granularity</span><span class="o">=</span><span class="s2">&quot;sentence&quot;</span><span class="p">,</span> <span class="n">nli_labels</span><span class="o">=</span><span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">start_file</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
+</span><span id="line-325">        <span class="n">score_zs1</span> <span class="o">=</span> <span class="n">model_zs</span><span class="o">.</span><span class="n">score</span><span class="p">([</span><span class="n">document</span><span class="p">],</span> <span class="p">[</span><span class="n">summary</span><span class="p">])</span>
+</span><span id="line-326">        <span class="n">score_conv1</span> <span class="o">=</span> <span class="n">model_conv</span><span class="o">.</span><span class="n">score</span><span class="p">([</span><span class="n">document</span><span class="p">],</span> <span class="p">[</span><span class="n">summary</span><span class="p">])</span>
+</span><span id="line-327">
+</span><span id="line-328">        <span class="k">return</span> <span class="n">score_zs1</span><span class="p">[</span><span class="s2">&quot;scores&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">score_conv1</span><span class="p">[</span><span class="s2">&quot;scores&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+</div>
+
+</span></code></pre></div>
+    </div></div>
+        </main>
+      </div>
+    </div><footer class="py-6 border-t border-border md:py-0">
+    <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+      <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2024, COAI&nbsp;Built with <a class="font-medium underline underline-offset-4"
+    href="https://www.sphinx-doc.org"
+    rel="noreferrer">Sphinx 7.3.7</a></p>
+</div>
+</div>
+</footer>
+  </div>
+  
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="../../../_static/theme.js?v=e82a16a3"></script>
+  
+</body>
+</html>

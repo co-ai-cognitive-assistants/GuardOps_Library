@@ -1,0 +1,10 @@
+/build
+/coai.egg-info
+/__pycache__
+*.__pycache__
+*.pyc
+__pycache__/
+evaluation/__pycache__/*
+summac_conv_vitc_sent_perc_e.bin
+evaluation/__pycache__/metrics.cpython-38.pyc
+.deepeval-cache.json
